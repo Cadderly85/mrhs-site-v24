@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manhattan Restorative Health Sciences | Luxury Wellness</title>
+    <meta name="description" content="Award-winning interventional pain management in NYC. MRHS provides advanced restorative therapies, regenerative medicine, and comprehensive pain management.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8D48B;
+            --gold-dark: #B8960C;
+            --black: #0A0A0A;
+            --ivory: #F8F6F0;
+            --sage: #8B9E8B;
+            --sage-dark: #6B7E6B;
+            --sage-light: #A8BFA8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            color: var(--black);
+            background-color: var(--black);
+            line-height: 1.8;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            line-height: 1.15;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===== SNAP SCROLL CONTAINER ===== */
+        .snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .snap-section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== SIDE NAVIGATION DOTS ===== */
+        .nav-dots {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            padding: 0;
+        }
+
+        .nav-dot:hover,
+        .nav-dot.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: scale(1.3);
+        }
+
+        .nav-dot .nav-label {
+            position: absolute;
+            right: 28px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Jost', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-dot:hover .nav-label {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .nav-dots {
+                right: 20px;
+                gap: 14px;
+            }
+            .nav-dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        /* ===== FLOATING ACCENT SHAPES ===== */
+        .floating-shape {
+            position: absolute;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-shape.circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            animation: floatSlow 12s ease-in-out infinite;
+        }
+
+        .floating-shape.square {
+            width: 120px;
+            height: 120px;
+            transform: rotate(45deg);
+            animation: floatSlow 15s ease-in-out infinite reverse;
+        }
+
+        .floating-shape.line {
+            width: 1px;
+            height: 100px;
+            background: rgba(212, 175, 55, 0.1);
+            border: none;
+            animation: floatSlow 10s ease-in-out infinite;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up-delay-1 { transition-delay: 0.15s; }
+        .fade-up-delay-2 { transition-delay: 0.3s; }
+        .fade-up-delay-3 { transition-delay: 0.45s; }
+        .fade-up-delay-4 { transition-delay: 0.6s; }
+
+        /* ===== KEN BURNS ===== */
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+
+        .ken-burns {
+            animation: kenBurns 25s ease-in-out infinite alternate;
+        }
+
+        /* ===== ELEGANT LINK UNDERLINE ===== */
+        .elegant-link {
+            position: relative;
+            color: var(--gold);
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .elegant-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .elegant-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .elegant-link:hover {
+            color: var(--gold-light);
+        }
+
+        /* ===== SECTION OVERLAY ===== */
+        .section-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .section-bg {
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            right: -5%;
+            bottom: -5%;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .section-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            padding: 80px 60px;
+        }
+
+        @media (max-width: 768px) {
+            .section-inner {
+                padding: 60px 28px;
+            }
+        }
+
+        /* ===== CTA BUTTON ===== */
+        .btn-gold {
+            display: inline-block;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            padding: 18px 48px;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .btn-gold:hover {
+            color: var(--black);
+        }
+
+        .btn-gold:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-gold:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== GOLD SEPARATOR ===== */
+        .gold-separator {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 32px 0;
+        }
+
+        .gold-separator.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ============================
+           SECTION 1 — HERO
+           ============================ */
+        #hero {
+            text-align: center;
+        }
+
+        #hero .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=1600&q=80');
+        }
+
+        #hero .section-overlay {
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 10, 10, 0.25) 0%,
+                rgba(10, 10, 10, 0.15) 40%,
+                rgba(10, 10, 10, 0.35) 80%,
+                rgba(10, 10, 10, 0.5) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 40px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: var(--gold);
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: var(--ivory);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            line-height: 1.1;
+            margin-bottom: 32px;
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(248, 246, 240, 0.7);
+            margin-bottom: 56px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+                letter-spacing: 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+                letter-spacing: 3px;
+            }
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            .hero-eyebrow {
+                font-size: 0.65rem;
+                letter-spacing: 4px;
+            }
+        }
+
+        /* ============================
+           SECTION 2 — STATS
+           ============================ */
+        #stats .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&q=80');
+        }
+
+        #stats .section-overlay {
+            background: rgba(10, 10, 10, 0.82);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--sage);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .stat-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--sage-light);
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+
+        /* ============================
+           SECTION 3 — ABOUT
+           ============================ */
+        #about {
+            background: var(--ivory);
+            color: var(--black);
+        }
+
+        #about .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1587351439-753f8b47a24f?w=1600&q=80');
+            opacity: 0.15;
+        }
+
+        #about .section-overlay {
+            background: rgba(248, 246, 240, 0.9);
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .about-image-border {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: -24px;
+            bottom: -24px;
+            border: 1px solid var(--gold);
+            z-index: 0;
+        }
+
+        .about-image-wrapper img {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--sage-dark);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .about-content h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .about-quote {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--black);
+            padding-left: 28px;
+            border-left: 2px solid var(--gold);
+            margin-top: 32px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            .about-content h2 {
+                font-size: 2rem;
+            }
+            .about-image-wrapper img {
+                height: 350px;
+            }
+        }
+
+        /* ============================
+           SECTION 4 — THE 4 PILLARS
+           ============================ */
+        #pillars {
+            background: var(--black);
+        }
+
+        #pillars .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1516455590571-18256e1cdf29?w=1600&q=80');
+            background-attachment: fixed;
+            opacity: 0.25;
+        }
+
+        #pillars .section-overlay {
+            background: rgba(10, 10, 10, 0.92);
+        }
+
+        .pillars-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .pillars-header .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .pillars-header h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 16px;
+        }
+
+        .pillars-header p {
+            font-size: 1.15rem;
+            color: rgba(248, 246, 240, 0.55);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: rgba(139, 158, 139, 0.1);
+        }
+
+        .pillar-card {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 48px 40px;
+            transition: all 0.5s ease;
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .pillar-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        .pillar-number {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--sage);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .pillar-card p {
+            font-size: 1rem;
+            color: rgba(248, 246, 240, 0.55);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+            .pillar-card {
+                padding: 36px 28px;
+            }
+        }
+
+
+        /* ============================
+           SECTION 4 — OUR SERVICES
+           ============================ */
+        #services {
+            background: var(--black);
+        }
+
+        #services .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80');
+            background-attachment: fixed;
+            opacity: 0.25;
+        }
+
+        #services .section-overlay {
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .services-header .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .services-header h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 16px;
+        }
+
+        .services-header p {
+            font-size: 1.15rem;
+            color: rgba(248, 246, 240, 0.55);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .service-card {
+            background: rgba(248, 246, 240, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px 32px;
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(248, 246, 240, 0.12);
+        }
+
+        .service-card h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: rgba(248, 246, 240, 0.65);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================
+           SECTION 5 — RESEARCH
+           ============================ */
+        #research {
+            background: #111;
+        }
+
+        #research .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&q=80');
+            background-attachment: fixed;
+        }
+
+        #research .section-overlay {
+            background: rgba(17, 17, 17, 0.9);
+        }
+
+        .research-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .research-header .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .research-header h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 24px;
+        }
+
+        .research-intro {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .research-intro p {
+            font-size: 1.1rem;
+            color: rgba(248, 246, 240, 0.55);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .research-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+
+        .research-card {
+            padding: 40px 32px;
+            border: 1px solid rgba(139, 158, 139, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            transition: border-color 0.4s ease;
+        }
+
+        .research-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .research-card h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .research-card p {
+            font-size: 0.95rem;
+            color: rgba(248, 246, 240, 0.5);
+            line-height: 1.8;
+        }
+
+        .publications-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .publications-list h3 {
+            font-size: 0.8rem;
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--sage);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .pub-item {
+            padding: 28px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .pub-item:last-child {
+            border-bottom: none;
+        }
+
+        .pub-item p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.05rem;
+            color: rgba(248, 246, 240, 0.6);
+            line-height: 1.7;
+        }
+
+        .pub-item strong {
+            color: rgba(248, 246, 240, 0.85);
+        }
+
+        .pub-item em {
+            color: var(--gold-light);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .research-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================
+           SECTION 6 — CAREERS
+           ============================ */
+        #careers {
+            background: var(--ivory);
+            color: var(--black);
+        }
+
+        .careers-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .careers-content .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--sage-dark);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .careers-content h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 24px;
+        }
+
+        .careers-content > p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 32px;
+        }
+
+        .core-values-section h3 {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold-dark);
+            margin-bottom: 28px;
+        }
+
+        .values-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .values-list li {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--black);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .values-list li:last-child {
+            border-bottom: none;
+        }
+
+        .careers-right {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .careers-cta-card {
+            background: var(--black);
+            color: var(--ivory);
+            padding: 56px 48px;
+            text-align: center;
+        }
+
+        .careers-cta-card h3 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 16px;
+        }
+
+        .careers-cta-card p {
+            font-size: 1.05rem;
+            color: rgba(248, 246, 240, 0.55);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .fellowship-card {
+            padding: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(248, 246, 240, 0.5);
+            transition: border-color 0.4s ease;
+        }
+
+        .fellowship-card:hover {
+            border-color: var(--gold);
+        }
+
+        .fellowship-card h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+
+        .fellowship-card p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .careers-layout {
+                grid-template-columns: 1fr;
+            }
+            .careers-content h2 {
+                font-size: 2rem;
+            }
+            .careers-cta-card {
+                padding: 40px 28px;
+            }
+        }
+
+        /* ============================
+           SECTION 7 — TEAM
+           ============================ */
+        #team {
+            background: var(--black);
+        }
+
+        #team .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=1600&q=80');
+            background-attachment: fixed;
+        }
+
+        #team .section-overlay {
+            background: rgba(10, 10, 10, 0.85);
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .team-header .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .team-header h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 16px;
+        }
+
+        .team-header p {
+            font-size: 1.15rem;
+            color: rgba(248, 246, 240, 0.5);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .team-card {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 48px 32px 40px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.5s ease;
+        }
+
+        .team-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .team-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 28px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card h3 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 8px;
+        }
+
+        .team-card .team-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .team-card p {
+            font-size: 0.95rem;
+            color: rgba(248, 246, 240, 0.45);
+            line-height: 1.7;
+        }
+
+        .team-card.featured {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+            align-items: center;
+            text-align: left;
+            padding: 48px;
+        }
+
+        .team-card.featured .team-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0;
+        }
+
+        .team-card.featured h3 {
+            font-size: 1.8rem;
+        }
+
+        @media (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .team-card.featured {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .team-card.featured {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .team-card.featured .team-photo {
+                margin: 0 auto;
+            }
+        }
+
+        /* ============================
+           SECTION 8 — TESTIMONIALS
+           ============================ */
+        #testimonials .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1600&q=80');
+            background-attachment: fixed;
+        }
+
+        #testimonials .section-overlay {
+            background: rgba(10, 10, 10, 0.88);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .testimonials-header .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .testimonials-header h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ivory);
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-slide {
+            flex: 0 0 100%;
+            text-align: center;
+            padding: 0 40px;
+        }
+
+        .testimonial-stars {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 8px;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--ivory);
+            line-height: 1.6;
+            max-width: 850px;
+            margin: 0 auto 40px;
+        }
+
+        .testimonial-author {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: rgba(248, 246, 240, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .testimonial-author strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .testimonial-source {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(248, 246, 240, 0.35);
+            display: block;
+            margin-top: 4px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 48px;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .testimonial-dot.active,
+        .testimonial-dot:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-quote {
+                font-size: 1.3rem;
+            }
+            .testimonial-slide {
+                padding: 0 20px;
+            }
+        }
+
+        /* ============================
+           SECTION 9 — CONTACT / FOOTER
+           ============================ */
+        #contact .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=1600&q=80');
+            background-attachment: fixed;
+        }
+
+        #contact .section-overlay {
+            background: rgba(10, 10, 10, 0.88);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .contact-header .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .contact-header h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 20px;
+        }
+
+        .contact-header p {
+            font-size: 1.15rem;
+            color: rgba(248, 246, 240, 0.5);
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .contact-detail-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--gold);
+        }
+
+        .contact-detail-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .contact-detail-value {
+            font-size: 1.1rem;
+            color: rgba(248, 246, 240, 0.7);
+        }
+
+        .contact-form-wrapper {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 48px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 0.65rem;
+            margin-bottom: 8px;
+            color: rgba(248, 246, 240, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            font-family: 'Jost', sans-serif;
+            font-size: 1rem;
+            color: var(--ivory);
+            background: rgba(0, 0, 0, 0.3);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .contact-form .btn-gold {
+            width: 100%;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .site-footer {
+            margin-top: 80px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .footer-brand span {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 300;
+            color: rgba(248, 246, 240, 0.35);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(248, 246, 240, 0.35);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-copy {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(248, 246, 240, 0.25);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            .contact-form-wrapper {
+                padding: 28px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .site-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* ===== MOBILE HAMBURGER ===== */
+        .mobile-hamburger {
+            display: none;
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .mobile-hamburger span {
+            display: block;
+            width: 22px;
+            height: 1px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        .mobile-hamburger.open span:nth-child(2) { opacity: 0; }
+        .mobile-hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.97);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .mobile-nav.open a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-nav.open a:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav.open a:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-nav.open a:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-nav.open a:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-nav.open a:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-nav.open a:nth-child(6) { transition-delay: 0.35s; }
+        .mobile-nav.open a:nth-child(7) { transition-delay: 0.4s; }
+        .mobile-nav.open a:nth-child(8) { transition-delay: 0.45s; }
+        .mobile-nav.open a:nth-child(9) { transition-delay: 0.5s; }
+
+        @media (max-width: 768px) {
+            .nav-dots {
+                display: none;
+            }
+            .mobile-hamburger,
+            .mobile-nav {
+                display: flex;
+            }
+        }
+
+        /* ===== SELECTION ===== */
+        ::selection {
+            background: var(--gold);
+            color: var(--black);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== MOBILE HAMBURGER ===== -->
+    <button class="mobile-hamburger" id="mobileHamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- ===== MOBILE NAV OVERLAY ===== -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#hero">Home</a>
+        <a href="#stats">Statistics</a>
+        <a href="#about">About</a>
+        <a href="#pillars">Pillars</a>
+        <a href="#research">Research</a>
+        <a href="#careers">Careers</a>
+        <a href="#team">Team</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- ===== NAVIGATION DOTS ===== -->
+    <nav class="nav-dots" id="navDots">
+        <button class="nav-dot active" data-target="#hero">
+            <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-dot" data-target="#stats">
+            <span class="nav-label">Statistics</span>
+        </button>
+        <button class="nav-dot" data-target="#about">
+            <span class="nav-label">About</span>
+        </button>
+        <button class="nav-dot" data-target="#pillars">
+            <span class="nav-label">Pillars</span>
+        </button>
+        <button class="nav-dot" data-target="#research">
+            <span class="nav-label">Research</span>
+        </button>
+        <button class="nav-dot" data-target="#careers">
+            <span class="nav-label">Careers</span>
+        </button>
+        <button class="nav-dot" data-target="#team">
+            <span class="nav-label">Team</span>
+        </button>
+        <button class="nav-dot" data-target="#testimonials">
+            <span class="nav-label">Testimonials</span>
+        </button>
+        <button class="nav-dot" data-target="#contact">
+            <span class="nav-label">Contact</span>
+        </button>
+    </nav>
+
+    <!-- ===== SNAP SCROLL CONTAINER ===== -->
+    <div class="snap-container" id="snapContainer">
+
+        <!-- ===== SECTION 1 — HERO ===== -->
+        <section class="snap-section" id="hero">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="floating-shape circle" style="top:15%;left:8%;opacity:0.3;"></div>
+            <div class="floating-shape square" style="bottom:20%;right:10%;opacity:0.2;animation-delay:-5s;"></div>
+            <div class="floating-shape line" style="top:10%;right:25%;animation-delay:-3s;"></div>
+            <div class="hero-content">
+                <span class="hero-eyebrow fade-up">Award-Winning Pain Management</span>
+                <h1 class="hero-title fade-up fade-up-delay-1">Manhattan Restorative<br>Health Sciences</h1>
+                <p class="hero-tagline fade-up fade-up-delay-2">Excellence in Patient Care for Over 15 Years</p>
+                <div class="fade-up fade-up-delay-3">
+                    <a href="#contact" class="btn-gold">Schedule a Consultation</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 2 — STATS ===== -->
+        <section class="snap-section" id="stats">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="stats-grid">
+                    <div class="stat-item fade-up">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">State-of-the-Art Facilities</div>
+                    </div>
+                    <div class="stat-item fade-up fade-up-delay-1">
+                        <div class="stat-number">59</div>
+                        <div class="stat-label">Award-Winning Doctors</div>
+                    </div>
+                    <div class="stat-item fade-up fade-up-delay-2">
+                        <div class="stat-number">40K+</div>
+                        <div class="stat-label">Advanced Restorative Therapies</div>
+                    </div>
+                    <div class="stat-item fade-up fade-up-delay-3">
+                        <div class="stat-number">17+</div>
+                        <div class="stat-label">Patient Care Accolades</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 3 — ABOUT ===== -->
+        <section class="snap-section" id="about">
+            <div class="floating-shape circle" style="top:20%;right:5%;opacity:0.08;border-color:var(--gold);"></div>
+            <div class="section-inner">
+                <div class="about-layout">
+                    <div class="about-image-wrapper fade-up">
+                        <div class="about-image-border"></div>
+                        <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=700&q=80" alt="Modern medical facility" loading="lazy">
+                    </div>
+                    <div class="about-content fade-up fade-up-delay-2">
+                        <span class="section-label">About Us</span>
+                        <h2>Restoring Health,<br>Reclaiming Lives</h2>
+                        <div class="gold-separator"></div>
+                        <p>Our team of physicians and specialists is dedicated to ensuring faster and more effective holistic outcomes through 360° precision diagnoses and expert, tailored treatments.</p>
+                        <p>At Manhattan Restorative Health Sciences, we combine cutting-edge technology with compassionate care to address the root causes of pain — not just the symptoms. Our patient-centered approach ensures that every treatment plan is customized to achieve optimal, long-lasting results.</p>
+                        <div class="about-quote">
+                            "We believe that everyone deserves a life free from chronic pain. Our mission is to make advanced, effective pain management accessible to all."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===== SECTION 4 — OUR SERVICES ===== -->
+        <section class="snap-section" id="services">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="services-header">
+                    <span class="section-label fade-up">Our Services</span>
+                    <h2 class="fade-up fade-up-delay-1">Comprehensive Pain Management Services</h2>
+                    <p class="fade-up fade-up-delay-2">Advanced, minimally invasive treatments combining cutting-edge technology with personalized care for lasting relief.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card fade-up">
+                        <h3>Pain Management</h3>
+                        <p>Full-spectrum care for acute, chronic, and complex pain conditions with advanced diagnostic imaging and multimodal pharmacological management.</p>
+                    </div>
+                    <div class="service-card fade-up fade-up-delay-1">
+                        <h3>Interventional Treatments</h3>
+                        <p>Minimally invasive procedures with imaging guidance including spinal cord stimulation, epidural injections, and radiofrequency ablation.</p>
+                    </div>
+                    <div class="service-card fade-up fade-up-delay-2">
+                        <h3>Regenerative Medicine</h3>
+                        <p>Biological therapies harnessing the body's natural healing mechanisms: PRP, stem cell treatments, and growth factor injections.</p>
+                    </div>
+                    <div class="service-card fade-up fade-up-delay-3">
+                        <h3>Integrative Wellness</h3>
+                        <p>Complementary therapies including physical rehabilitation, chiropractic care, aquatic therapy, and behavioral health support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 5 — THE 4 PILLARS ===== -->
+        <section class="snap-section" id="pillars">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="pillars-header">
+                    <span class="section-label fade-up">Our Approach</span>
+                    <h2 class="fade-up fade-up-delay-1">Four Pillars of Excellence</h2>
+                    <p class="fade-up fade-up-delay-1">Our comprehensive approach to pain management integrates four foundational disciplines to deliver exceptional patient outcomes.</p>
+                </div>
+                <div class="pillars-grid">
+                    <div class="pillar-card fade-up">
+                        <div class="pillar-number">01</div>
+                        <h3>Comprehensive Pain Management</h3>
+                        <p>We begin with a thorough evaluation of each patient's condition, medical history, and lifestyle factors. Our multidisciplinary team works together to develop individualized treatment plans that address the full spectrum of pain — from acute injury to chronic conditions — ensuring no aspect of care is overlooked.</p>
+                    </div>
+                    <div class="pillar-card fade-up fade-up-delay-1">
+                        <div class="pillar-number">02</div>
+                        <h3>Advanced Interventional Treatments</h3>
+                        <p>Utilizing the latest minimally invasive techniques and image-guided procedures, our interventional specialists target pain at its source. These precision treatments offer patients faster recovery times, reduced risk, and superior outcomes compared to traditional surgical approaches.</p>
+                    </div>
+                    <div class="pillar-card fade-up fade-up-delay-2">
+                        <div class="pillar-number">03</div>
+                        <h3>Regenerative Medicine</h3>
+                        <p>Our regenerative therapies harness the body's natural healing mechanisms to repair damaged tissues and restore function. Through advanced biologic treatments and cutting-edge cellular therapies, we help patients achieve lasting relief and improved quality of life.</p>
+                    </div>
+                    <div class="pillar-card fade-up fade-up-delay-3">
+                        <div class="pillar-number">04</div>
+                        <h3>Integrative Wellness Therapies</h3>
+                        <p>True healing extends beyond procedures. We incorporate complementary wellness strategies — including nutritional guidance, exercise protocols, and mind-body practices — to support whole-body recovery and empower patients to maintain lasting results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 5 — RESEARCH ===== -->
+        <section class="snap-section" id="research">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="research-header">
+                    <span class="section-label fade-up">Research</span>
+                    <h2 class="fade-up fade-up-delay-1">Driven to Innovate &amp;<br>Produce Leading Clinical Research</h2>
+                </div>
+                <div class="research-intro fade-up">
+                    <p>Our foundational work with Harvard Medical School and other leading institutions demonstrates our deep expertise and a commitment to producing leading academic research.</p>
+                    <p>We strive to advance the study and practice of Restorative Health Sciences and the promotion of universal access to an improved quality of life.</p>
+                </div>
+                <div class="research-cards">
+                    <div class="research-card fade-up fade-up-delay-1">
+                        <h3>PainQx Platform</h3>
+                        <p>An AI-powered cloud-based solution using EEG data to classify a patient's pain state at the point of care. This innovative technology supports chronic pain assessment in populations that cannot accurately articulate their pain, such as Alzheimer's patients.</p>
+                    </div>
+                    <div class="research-card fade-up fade-up-delay-2">
+                        <h3>Ketamine Virtual Reality (KVR)</h3>
+                        <p>Use of VR video and audio stimulation to enhance ketamine therapy for chronic pain and depression. Dr. Canty pioneered this innovative treatment approach. The first research analysis has been conducted, showing promising results for patients.</p>
+                    </div>
+                    <div class="research-card fade-up fade-up-delay-3">
+                        <h3>Novel Therapy for Wellbeing</h3>
+                        <p>Research measuring the effects of a novel application of accepted intervention combined with behavioral therapy for immediate effect on sense of wellbeing and the ability to resist intrusive thoughts.</p>
+                    </div>
+                </div>
+                <div class="publications-list fade-up">
+                    <h3>Selected Publications</h3>
+                    <div class="pub-item">
+                        <p><strong>Selinger M, Compton D, Morris H, Canty T</strong> (2023) "Virtual Reality as an Adjunct to Ketamine Infusion Therapy Increases Patient Satisfaction in the Management of Chronic Pain and Depression." <em>J Behav Brain Sci</em> 13:243-261.</p>
+                    </div>
+                    <div class="pub-item">
+                        <p><strong>Canty T.</strong> "Postoperative pain therapy" in <em>Evidence-based Anaesthesia</em>, Cambridge University Press, 2006.</p>
+                    </div>
+                    <div class="pub-item">
+                        <p><strong>Canty T, Balantyne J.</strong> "Regional Anesthesia in the Obese Patient" in <em>Perioperative Anesthesia for the Obese Patient</em>, 2009.</p>
+                    </div>
+                    <div class="pub-item">
+                        <p><strong>Canty T.</strong> "Neuromodulation" in <em>Pain Management Clinical Pocket Guide</em>, Springer, 2014.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 6 — CAREERS ===== -->
+        <section class="snap-section" id="careers">
+            <div class="floating-shape line" style="top:15%;left:10%;opacity:0.15;background:var(--gold);"></div>
+            <div class="section-inner">
+                <div class="careers-layout">
+                    <div class="careers-content">
+                        <span class="section-label fade-up">Careers</span>
+                        <h2 class="fade-up fade-up-delay-1">A Culture of Excellence</h2>
+                        <div class="gold-separator fade-up fade-up-delay-1"></div>
+                        <p class="fade-up fade-up-delay-2">We set high standards for our employees, officers and directors, and encourage a culture of excellence for the benefit of both our patients and our teams alike.</p>
+                        <div class="core-values-section fade-up fade-up-delay-3">
+                            <h3>Our Core Values</h3>
+                            <ul class="values-list">
+                                <li>Inspiration</li>
+                                <li>Purpose</li>
+                                <li>Professionalism</li>
+                                <li>Collaboration</li>
+                                <li>Innovation</li>
+                            </ul>
+                        </div>
+                        <div class="gold-separator fade-up fade-up-delay-4"></div>
+                        <a href="https://www.indeed.com/cmp/Manhattan-Restorative-Health-Sciences" target="_blank" rel="noopener noreferrer" class="elegant-link fade-up fade-up-delay-4">View Careers on Indeed</a>
+                    </div>
+                    <div class="careers-right">
+                        <div class="careers-cta-card fade-up">
+                            <h3>Join Our Team</h3>
+                            <p>We are always looking for talented and passionate healthcare professionals to join our growing team. Take the next step in your career with Manhattan Restorative Health Sciences.</p>
+                            <a href="#contact" class="btn-gold">Get in Touch</a>
+                        </div>
+                        <div class="fellowship-card fade-up fade-up-delay-2">
+                            <h3>Fellowship Programs</h3>
+                            <p>The Manhattan Pain fellowship is one of the first non-accredited Pain fellowships in Manhattan. We provide training in comprehensive pain management with emphasis on interventional and regenerative treatment options.</p>
+                            <a href="#contact" class="elegant-link">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 7 — TEAM ===== -->
+        <section class="snap-section" id="team">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="team-header">
+                    <span class="section-label fade-up">Our Team</span>
+                    <h2 class="fade-up fade-up-delay-1">Meet Our Physicians</h2>
+                    <p class="fade-up fade-up-delay-1">Our award-winning team of board-certified physicians brings together decades of experience in interventional pain management and restorative health sciences.</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-card featured fade-up">
+                        <div class="team-photo">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="Dr. Timothy Canty" loading="lazy">
+                        </div>
+                        <div>
+                            <h3>Dr. Timothy Canty</h3>
+                            <span class="team-title">Chief Medical Officer &amp; Founder</span>
+                            <p>Dr. Canty is a board-certified anesthesiologist and pain management specialist with training from Harvard Medical School. As the founder of Manhattan Restorative Health Sciences, he has dedicated his career to advancing interventional pain management through clinical excellence and research innovation. His pioneering work in ketamine therapy and virtual reality-assisted treatments has positioned MRHS at the forefront of pain medicine.</p>
+                        </div>
+                    </div>
+                    <div class="team-card fade-up">
+                        <div class="team-photo">
+                            <img src="https://images.unsplash.com/photo-1594824475480-05e5e5d5e5e5?w=300&q=80" alt="Dr. Fontenot" loading="lazy">
+                        </div>
+                        <h3>Dr. Fontenot</h3>
+                        <span class="team-title">Pain Management</span>
+                    </div>
+                    <div class="team-card fade-up">
+                        <div class="team-photo">
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&q=80" alt="Dr. Calabrese" loading="lazy">
+                        </div>
+                        <h3>Dr. Calabrese</h3>
+                        <span class="team-title">Interventional Pain</span>
+                    </div>
+                    <div class="team-card fade-up">
+                        <div class="team-photo">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&q=80" alt="Dr. Reddy" loading="lazy">
+                        </div>
+                        <h3>Dr. Reddy</h3>
+                        <span class="team-title">Regenerative Medicine</span>
+                    </div>
+                    <div class="team-card fade-up">
+                        <div class="team-photo">
+                            <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=300&q=80" alt="Dr. Stasyshyn" loading="lazy">
+                        </div>
+                        <h3>Dr. Stasyshyn</h3>
+                        <span class="team-title">Pain Management</span>
+                    </div>
+                    <div class="team-card fade-up">
+                        <div class="team-photo">
+                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=300&q=80" alt="Dr. Elhindi" loading="lazy">
+                        </div>
+                        <h3>Dr. Elhindi</h3>
+                        <span class="team-title">Anesthesiology</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 8 — TESTIMONIALS ===== -->
+        <section class="snap-section" id="testimonials">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="testimonials-header">
+                    <span class="section-label fade-up">Testimonials</span>
+                    <h2 class="fade-up fade-up-delay-1">What Our Patients Say</h2>
+                </div>
+                <div class="testimonials-track-wrapper" style="overflow:hidden;max-width:1000px;margin:0 auto;">
+                    <div class="testimonials-track" id="testimonialTrack">
+                        <div class="testimonial-slide">
+                            <div class="testimonial-stars" style="color:#D4AF37;font-family:Jost,sans-serif;font-size:0.85rem;letter-spacing:0.05em">5/5</div>
+                            <p class="testimonial-quote">"I went to 8 doctors before feeling comfortable and confident with Dr. Hildebrand. She is not only a great doctor, she is knowledgeable and has an amazing bedside manner."</p>
+                            <div class="testimonial-author">
+                                <strong>— Sherry V.</strong>
+                                <span class="testimonial-source">Google Review</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-stars" style="color:#D4AF37;font-family:Jost,sans-serif;font-size:0.85rem;letter-spacing:0.05em">5/5</div>
+                            <p class="testimonial-quote">"The team and Dr. Canty were very empathetic, and put you right at ease. Everyone could not do enough to make it easy for you and everything was explained perfectly to make you feel comfortable."</p>
+                            <div class="testimonial-author">
+                                <strong>— Anna D.</strong>
+                                <span class="testimonial-source">Google Review</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-stars" style="color:#D4AF37;font-family:Jost,sans-serif;font-size:0.85rem;letter-spacing:0.05em">5/5</div>
+                            <p class="testimonial-quote">"A unique experience. The clinic is warm and clean and I felt comfortable collecting myself afterwards. The results have been very positive and I look forward to returning."</p>
+                            <div class="testimonial-author">
+                                <strong>— David L.</strong>
+                                <span class="testimonial-source">Google Review</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <button class="testimonial-dot active" data-slide="0"></button>
+                    <button class="testimonial-dot" data-slide="1"></button>
+                    <button class="testimonial-dot" data-slide="2"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 9 — CONTACT / FOOTER ===== -->
+        <section class="snap-section" id="contact">
+            <div class="section-bg ken-burns"></div>
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="contact-header">
+                    <span class="section-label fade-up">Contact</span>
+                    <h2 class="fade-up fade-up-delay-1">Get in Touch</h2>
+                    <p class="fade-up fade-up-delay-1">Take the first step toward a life without chronic pain. Our team is ready to help you find relief and restore your quality of life.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-details fade-up">
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div>
+                                <span class="contact-detail-label">Phone</span>
+                                <div class="contact-detail-value">917-524-7246</div>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div>
+                                <span class="contact-detail-label">Email</span>
+                                <div class="contact-detail-value">info@mrhs.com</div>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <span class="contact-detail-label">Locations</span>
+                                <div class="contact-detail-value">Multiple locations across New York City</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-wrapper fade-up fade-up-delay-2">
+                        <h3>Request an Appointment</h3>
+                        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your request. Our team will contact you shortly to confirm your appointment.');">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" placeholder="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" placeholder="Smith" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" placeholder="(555) 555-5555">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service of Interest</label>
+                                <select id="service">
+                                    <option value="" disabled selected>Select a service</option>
+                                    <option value="pain-management">Comprehensive Pain Management</option>
+                                    <option value="rfa">Radiofrequency Ablation</option>
+                                    <option value="spinal-cord">Spinal Cord Stimulation</option>
+                                    <option value="kyphoplasty">Kyphoplasty</option>
+                                    <option value="intracept">Intracept Procedure</option>
+                                    <option value="ketamine">Ketamine Therapy</option>
+                                    <option value="bmac">BMAC Therapy</option>
+                                    <option value="other">Other / Not Sure</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Tell Us About Your Condition</label>
+                                <textarea id="message" placeholder="Please briefly describe your condition or symptoms..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-gold">Submit Request</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="site-footer fade-up">
+                    <div class="footer-brand">
+                        MRHS
+                        <span>Manhattan Restorative Health Sciences</span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#pillars">Our Approach</a>
+                        <a href="#research">Research</a>
+                        <a href="#careers">Careers</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <div class="footer-copy">
+                        &copy; 2026 Manhattan Restorative Health Sciences. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== FADE-UP SCROLL REVEAL =====
+        const fadeElements = document.querySelectorAll('.fade-up');
+
+        const fadeObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        fadeElements.forEach(function(el) {
+            fadeObserver.observe(el);
+        });
+
+        // ===== NAVIGATION DOTS ACTIVE STATE =====
+        const sections = document.querySelectorAll('.snap-section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        const navObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var id = entry.target.getAttribute('id');
+                    navDots.forEach(function(dot) {
+                        dot.classList.remove('active');
+                        if (dot.getAttribute('data-target') === '#' + id) {
+                            dot.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        sections.forEach(function(section) {
+            navObserver.observe(section);
+        });
+
+        // ===== NAV DOT CLICK =====
+        navDots.forEach(function(dot) {
+            dot.addEventListener('click', function() {
+                var target = document.querySelector(this.getAttribute('data-target'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ===== TESTIMONIAL SLIDER =====
+        var track = document.getElementById('testimonialTrack');
+        var dots = document.querySelectorAll('.testimonial-dot');
+        var currentSlide = 0;
+        var totalSlides = 3;
+        var autoSlideInterval;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            if (track) {
+                track.style.transform = 'translateX(-' + (index * 100) + '%)';
+            }
+            dots.forEach(function(dot, i) {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(function() {
+                goToSlide((currentSlide + 1) % totalSlides);
+            }, 6000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        dots.forEach(function(dot) {
+            dot.addEventListener('click', function() {
+                var slideIndex = parseInt(this.getAttribute('data-slide'));
+                goToSlide(slideIndex);
+                resetAutoSlide();
+            });
+        });
+
+        startAutoSlide();
+
+        // ===== MOBILE NAV =====
+        var hamburger = document.getElementById('mobileHamburger');
+        var mobileNav = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('open');
+            mobileNav.classList.toggle('open');
+        });
+
+        mobileNav.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('open');
+                mobileNav.classList.remove('open');
+            });
+        });
+
+        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                var target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
